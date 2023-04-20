@@ -4,6 +4,7 @@
 int main()
 {
     FILE *fptr = NULL;
+    
     // Write to file
     // char str[80] = "Hello World! How you doing? And this is interseting.";
     // fptr = fopen("textFile.txt", "w"); // Open file in write mode -> "w"
