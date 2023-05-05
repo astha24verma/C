@@ -1,5 +1,5 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 struct node
 {
@@ -11,6 +11,7 @@ struct node
 struct node *head;
 
 // Operations on doubly linkedlist -
+
 // addAtBeg()
 // append()
 // addAfter()
@@ -39,7 +40,7 @@ void addAtBeg(int val)
     else
     {
         newNode->next = head;
-        newNode->prev = newNode;
+        head->prev = newNode;
         head = newNode;
     }
 }
@@ -53,9 +54,9 @@ void addAfter(int val, int loc)
     newNode->next = NULL;
 
     // check loc is valid or not
-    int count = 0;
+    int count = 1;
     temp = head;
-    while (temp != NULL)
+    while (temp->next != NULL)
     {
         count++;
         temp = temp->next;
@@ -67,13 +68,13 @@ void addAfter(int val, int loc)
     else
     {
         temp = head;
-        for (int i = 0; i < loc; i++)
+        for (int i = 1; i < loc; i++)
         {
             temp = temp->next;
         }
 
         newNode->next = temp->next;
-        temp->next->prev =temp;
+        temp->next->prev = newNode;
         newNode->prev = temp;
         temp->next = newNode;
     }
@@ -94,7 +95,7 @@ void append(int val)
     else
     {
         temp = head;
-        while (temp->next != NULL)
+        while (temp->next != NULL) // see !!!!!
         {
             temp = temp->next;
         }
@@ -119,31 +120,45 @@ void delete(int val)
         }
         else
         {
-            struct node *temp, *prev;
+            struct node *temp;
             temp = head;
-            while (temp->data != val)
+            while (temp->data != val && temp->next != NULL)
             {
-                prev = temp;
                 temp = temp->next;
             }
-            prev->next = temp->next;
-            printf("Node deleted : %d \n", temp->data);
-            free(temp);
+            if (temp->data == val)
+            {
+                temp->prev->next = temp->next;
+                temp->next->prev = temp->prev;
+                printf("Node deleted >> %d \n", temp->data);
+                free(temp);
+            }
+            else
+            {
+                printf("Node not found !!\n");
+            }
         }
     }
 }
 
 void display()
 {
-    if(head == NULL) printf("List is Empty \n");
-    struct node *temp;
-    temp = head;
-    while (temp != NULL)
+    if (head == NULL)
     {
-        printf(" %d -> ", temp->data);
-        temp = temp->next;
+        printf("List is Empty \n");
     }
-    printf("X \n");
+    else
+    {
+        struct node *temp;
+        temp = head;
+        printf("X <->");
+        while (temp != NULL)
+        {
+            printf(" %d <->", temp->data);
+            temp = temp->next;
+        }
+        printf(" X \n");
+    }
 }
 
 void main()
@@ -163,7 +178,7 @@ void main()
             addAtBeg(val);
             break;
         case 2:
-            printf("Enter data and position to insert at : ");
+            printf("Enter data and position to insert after : ");
             scanf("%d %d", &val, &loc);
             addAfter(val, loc);
             break;
@@ -185,6 +200,6 @@ void main()
         default:
             break;
         }
-        display();
+        // display();
     }
 }

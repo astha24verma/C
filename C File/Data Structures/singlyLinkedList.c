@@ -11,6 +11,7 @@ struct node *head;
 // head = NULL;
 
 // Operations on singly linkedlist -
+
 // addAtBeg()
 // append()
 // addAfter()
@@ -23,7 +24,7 @@ void addAfter(int, int);
 void delete(int);
 void display();
 
-void addAtBeg(int val) // passed ✅
+void addAtBeg(int val) 
 {
 
     struct node *newNode;
@@ -42,7 +43,7 @@ void addAtBeg(int val) // passed ✅
     }
 }
 
-void append(int val) // passed ✅
+void append(int val) 
 {
     struct node *newNode, *temp;
     newNode = (struct node *)malloc(sizeof(struct node));
@@ -64,7 +65,7 @@ void append(int val) // passed ✅
     }
 }
 
-void addAfter(int val, int loc) // passed ✅
+void addAfter(int val, int loc) 
 {
     struct node *newNode, *temp;
     newNode = (struct node *)malloc(sizeof(struct node));
@@ -96,7 +97,7 @@ void addAfter(int val, int loc) // passed ✅
     }
 }
 
-void delete(int val)    // passed ✅
+void delete(int val)   
 {
     if (head == NULL)
     {
@@ -135,14 +136,14 @@ void delete(int val)    // passed ✅
                 }
                 else
                 {
-                    printf("\nNode not found !!\n");
+                    printf("Node not found !!\n");
                 }
             }
         }
     }
 }
 
-void display()  // passed ✅
+void display() 
 {
     struct node *temp;
     temp = head;
@@ -171,7 +172,7 @@ void main()
             addAtBeg(val);
             break;
         case 2:
-            printf("Enter data and position to insert at : ");
+            printf("Enter data and position to insert after : ");
             scanf("%d %d", &val, &loc);
             addAfter(val, loc);
             break;
@@ -194,6 +195,6 @@ void main()
         default:
             break;
         }
-        display();
+        // display();
     }
 }
