@@ -11,7 +11,6 @@ struct node
 struct node *head;
 
 // Operations on doubly linkedlist -
-
 // addAtBeg()
 // append()
 // addAfter()
@@ -43,6 +42,7 @@ void addAtBeg(int val)
         head->prev = newNode;
         head = newNode;
     }
+    printf("Node inserted !\n");
 }
 
 void addAfter(int val, int loc)
@@ -77,6 +77,8 @@ void addAfter(int val, int loc)
         temp->next->prev = newNode;
         newNode->prev = temp;
         temp->next = newNode;
+
+        printf("Node inserted !\n");
     }
 }
 
@@ -120,22 +122,31 @@ void delete(int val)
         }
         else
         {
-            struct node *temp;
-            temp = head;
-            while (temp->data != val && temp->next != NULL)
+            if (head->data == val)
             {
-                temp = temp->next;
-            }
-            if (temp->data == val)
-            {
-                temp->prev->next = temp->next;
-                temp->next->prev = temp->prev;
-                printf("Node deleted >> %d \n", temp->data);
-                free(temp);
+                printf("Node(head) deleted >> %d \n", head->data);
+                head = head->next;
+                // can free head
             }
             else
             {
-                printf("Node not found !!\n");
+                struct node *temp;
+                temp = head;
+                while (temp->data != val && temp->next != NULL)
+                {
+                    temp = temp->next;
+                }
+                if (temp->data == val)
+                {
+                    temp->prev->next = temp->next;
+                    temp->next->prev = temp->prev;
+                    printf("Node deleted >> %d \n", temp->data);
+                    free(temp);
+                }
+                else
+                {
+                    printf("Node not found !!\n");
+                }
             }
         }
     }
@@ -167,7 +178,7 @@ void main()
     int ch, val, loc;
     while (1)
     {
-        printf("Enter choice /n 1.addBeg 2.addAfter 3.append 4.delete 5.display 6.exit \n");
+        printf("Enter choice 1.addBeg 2.addAfter 3.append 4.delete 5.display 6.exit \n");
 
         scanf("%d", &ch);
         switch (ch)

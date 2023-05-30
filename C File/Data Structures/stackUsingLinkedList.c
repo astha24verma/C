@@ -2,6 +2,10 @@
 #include <stdlib.h>
 
 // Implementation of Stack using Linked List
+// Operations on stack -
+// display()
+// push()
+// pop()
 struct node
 {
     int data;
@@ -30,7 +34,7 @@ void push(int val)
         top = newNode;
     }
     count++;
-    printf("Node inserted !\n");
+    printf("Element inserted !\n");
 }
 
 void pop()
@@ -44,7 +48,7 @@ void pop()
     }
     else
     {
-        printf("Node deleted >> %d\n", top->data);
+        printf("Element deleted >> %d\n", top->data);
         temp = top;
         top = top->next;
         free(temp);
@@ -65,7 +69,7 @@ void display()
     {
         while (temp != NULL)
         {
-            printf("%d -> ", temp->data);
+            printf("%d > ", temp->data);
             temp = temp->next;
         }
         printf("X\n");
